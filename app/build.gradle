@@ -1,0 +1,45 @@
+apply plugin: 'java-library'
+apply plugin: 'application'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+application {
+	mainClassName = 'com.interview.coffeegrinder.CoffeeGrinderMain'
+}
+
+ext {
+	log4jVersion = '2.17.1'
+	testngVersion = '6.8.21'
+	gsonVersion = '2.6.2'
+	okhttpVersion = '3.10.0'
+	okioVersion = '1.14.0'
+}
+
+dependencies {
+
+	implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
+	implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+	
+	implementation "com.google.code.gson:gson:${gsonVersion}"
+	
+	implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+	implementation "com.squareup.okio:okio:${okioVersion}"
+
+	testImplementation  "org.testng:testng:${testngVersion}"
+}
+
+run {
+
+	standardInput = System.in
+	systemProperty "java.library.path", ""
+	jvmArgs '-Xdebug'
+}
+
+test {
+	// enable TestNG support (default is JUnit)
+	useTestNG()
+	// enable console output for tests
+	testLogging {
+		showStandardStreams = true
+	}	
+}

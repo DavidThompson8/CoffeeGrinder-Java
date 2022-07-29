@@ -1,0 +1,28 @@
+description = 'CoffeeGrinder'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+//=========================================================
+// Used to initialize the wrapper so that developers do not need to install gradle.
+//=========================================================
+wrapper {
+    gradleVersion = '5.4.1'
+    //noinspection UnnecessaryQualifiedReference
+    distributionType = Wrapper.DistributionType.ALL
+}
