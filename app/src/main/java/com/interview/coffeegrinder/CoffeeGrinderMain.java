@@ -22,24 +22,24 @@ public class CoffeeGrinderMain {
 
     //Display the menu, then begin getting input
     view.printWelcome();
-    while(true){
+    while(true){//program runs until the exit option is chosen
       inputValue = input.next(); //get user choice
       input.nextLine(); //flush anything extra
       switch(inputValue){
-        case "1":
+        case "1": //get the list of coffees
           view.printList(grind.getCoffees());
           break;
-        case "2":
+        case "2": //get details for a specific coffee
           view.printIdRequest();
-          inputValue = input.next(); //get user choice
+          inputValue = input.next(); //get desired id from user
           input.nextLine(); //flush anything extra
           view.printCoffee(grind.getCoffee(inputValue));
           break;
-        case "3":
+        case "3": //exit the program
           view.printExit();
           System.exit(0);
           break;
-        default:
+        default: //ask for valid input
           view.printInvalid();
       }
 
