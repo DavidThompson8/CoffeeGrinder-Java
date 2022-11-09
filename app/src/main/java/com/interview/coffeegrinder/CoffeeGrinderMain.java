@@ -1,18 +1,48 @@
 package com.interview.coffeegrinder;
 
 import com.interview.coffeegrinder.api.Grinder;
+import com.interview.coffeegrinder.view.TextDisplay;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 
 public class CoffeeGrinderMain {
 
+  //Main servers as the controller, taking user input and acting accordingly
   public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
 
-    System.out.println("CoffeeGrinder!");
+    //set up view and grinder
+    TextDisplay view  = new TextDisplay();
     Grinder grind = new Grinder();
-    grind.getCoffees();
-    grind.getCoffee("2");
-    System.out.println(grind.getCoffee("2"));
+
+    //Scanner to read user inputs and string to hold them
+    Scanner input = new Scanner(System.in);
+    String inputValue = "";
+
+    //Display the menu, then begin getting input
+    view.printWelcome();
+    while(true){
+      inputValue = input.next(); //get user choice
+      input.nextLine(); //flush anything extra
+      switch(inputValue){
+        case "1":
+          view.printList(grind.getCoffees());
+          break;
+        case "2":
+          view.printIdRequest();
+          inputValue = input.next(); //get user choice
+          input.nextLine(); //flush anything extra
+          view.printCoffee(grind.getCoffee(inputValue));
+          break;
+        case "3":
+          view.printExit();
+          System.exit(0);
+          break;
+        default:
+          view.printInvalid();
+      }
+
+    }
   }
 }
